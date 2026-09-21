@@ -1,5 +1,11 @@
 import Foundation
 
+// Compiled into module CryptoKit itself by Darling/run-vectors.sh (no import possible), and
+// as a separate test module when the built framework is exercised under Darling.
+#if !DARLING_CRYPTOKIT_MODULE
+import CryptoKit
+#endif
+
 func hex(_ bytes: [UInt8]) -> String { bytes.map { String(format: "%02x", $0) }.joined() }
 
 var failures = 0

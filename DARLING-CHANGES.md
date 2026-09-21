@@ -83,7 +83,14 @@ vectors against it:
   twice must be stable.
 - **RFC 4231 HMAC-SHA-256** — cases 1, 2, 3, 4, 6 and 7, including both over-block-size-key cases.
 
-21/21 pass. Run it with `SWIFTC=/path/to/swiftc ./Darling/run-vectors.sh`.
+21/21 pass, in **both** environments:
+
+- a native host build of these sources (`SWIFTC=/path/to/swiftc ./Darling/run-vectors.sh`), and
+- the built `CryptoKit.framework` **running under Darling** on arm64, where the test binary links
+  the real framework and is executed by Darling's dyld and Swift runtime.
+
+The second is the one that matters: a SHA-256 that is right on Linux and wrong under Darling's
+runtime is exactly the failure mode this is meant to rule out.
 
 `Darling/Vectors/support.swift` carries a Linux-only `memset_s` shim so the identical sources can
 be exercised on a Linux host; Darwin (and therefore Darling) has `memset_s` natively and does not

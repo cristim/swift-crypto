@@ -1,5 +1,11 @@
 import Foundation
 
+// Compiled into module CryptoKit itself by Darling/run-vectors.sh (no import possible), and
+// as a separate test module when the built framework is exercised under Darling.
+#if !DARLING_CRYPTOKIT_MODULE
+import CryptoKit
+#endif
+
 // Test scaffolding ONLY, not part of the fork. Darwin (and therefore Darling) has memset_s;
 // Linux does not, and on Linux swift-crypto normally gets zeroization from BoringSSL. This shim
 // exists purely so the identical sources can be exercised natively on this host.
