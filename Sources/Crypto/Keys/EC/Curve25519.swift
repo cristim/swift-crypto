@@ -12,7 +12,7 @@
 //
 //===----------------------------------------------------------------------===//
 
-#if canImport(CryptoKit)
+#if canImport(CryptoKit) && !DARLING_CRYPTOKIT_MODULE
 @_exported import CryptoKit
 #else
 /// An elliptic curve that enables X25519 key agreement and Ed25519 signatures.

@@ -12,7 +12,7 @@
 //
 //===----------------------------------------------------------------------===//
 
-#if canImport(CryptoKit)
+#if canImport(CryptoKit) && !DARLING_CRYPTOKIT_MODULE
 @_exported import CryptoKit
 #else
 #if canImport(FoundationEssentials)
@@ -23,7 +23,11 @@ import Foundation
 
 protocol MACAlgorithm {
     associatedtype Key
+    #if DARLING_CRYPTOKIT_MODULE
+    associatedtype MAC: CryptoKit.MessageAuthenticationCode
+    #else
     associatedtype MAC: Crypto.MessageAuthenticationCode
+    #endif
 
     /// Initializes the MAC Algorithm
     ///

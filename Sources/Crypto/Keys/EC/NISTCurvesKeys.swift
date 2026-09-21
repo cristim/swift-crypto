@@ -18,7 +18,7 @@ import FoundationEssentials
 import Foundation
 #endif
 
-#if canImport(CryptoKit)
+#if canImport(CryptoKit) && !DARLING_CRYPTOKIT_MODULE
 @_exported import CryptoKit
 #else
 typealias SupportedCurveDetailsImpl = OpenSSLSupportedNISTCurve

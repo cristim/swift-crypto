@@ -12,7 +12,7 @@
 //
 //===----------------------------------------------------------------------===//
 
-#if canImport(CryptoKit)
+#if canImport(CryptoKit) && !DARLING_CRYPTOKIT_MODULE
 @_exported import CryptoKit
 #else
 #if !CRYPTOKIT_IN_SEP

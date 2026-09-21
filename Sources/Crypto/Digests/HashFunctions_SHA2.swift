@@ -12,7 +12,7 @@
 //
 //===----------------------------------------------------------------------===//
 
-#if canImport(CryptoKit)
+#if canImport(CryptoKit) && !DARLING_CRYPTOKIT_MODULE
 @_exported import CryptoKit
 #else
 /// An implementation of Secure Hashing Algorithm 2 (SHA-2) hashing with a
@@ -112,7 +112,9 @@ public struct SHA256: HashFunctionImplementationDetails, Sendable {
 /// in memory, you can compute the digest iteratively by creating a new hash
 /// instance, calling the ``update(data:)`` method repeatedly with blocks of
 /// data, and then calling the ``finalize()`` method to get the result.
+#if !DARLING_CRYPTOKIT_MODULE  // Darling: SHA-256 only, see DARLING-CHANGES.md
 public typealias SHA2_384 = SHA384
+#endif
 
 /// An implementation of Secure Hashing Algorithm 2 (SHA-2) hashing with a
 /// 384-bit digest.
@@ -126,6 +128,7 @@ public typealias SHA2_384 = SHA384
 /// in memory, you can compute the digest iteratively by creating a new hash
 /// instance, calling the ``update(data:)`` method repeatedly with blocks of
 /// data, and then calling the ``finalize()`` method to get the result.
+#if !DARLING_CRYPTOKIT_MODULE  // Darling: SHA-256 only, see DARLING-CHANGES.md
 public struct SHA384: HashFunctionImplementationDetails, Sendable {
     /// The number of bytes that represents the hash function’s internal state.
     public static let blockByteCount: Int = 128
@@ -185,6 +188,7 @@ public struct SHA384: HashFunctionImplementationDetails, Sendable {
         return impl.finalize()
     }
 }
+#endif
 
 /// An implementation of Secure Hashing Algorithm 2 (SHA-2) hashing with a
 /// 512-bit digest.
@@ -198,7 +202,9 @@ public struct SHA384: HashFunctionImplementationDetails, Sendable {
 /// in memory, you can compute the digest iteratively by creating a new hash
 /// instance, calling the ``update(data:)`` method repeatedly with blocks of
 /// data, and then calling the ``finalize()`` method to get the result.
+#if !DARLING_CRYPTOKIT_MODULE  // Darling: SHA-256 only, see DARLING-CHANGES.md
 public typealias SHA2_512 = SHA512
+#endif
 
 /// An implementation of Secure Hashing Algorithm 2 (SHA-2) hashing with a
 /// 512-bit digest.
@@ -212,6 +218,7 @@ public typealias SHA2_512 = SHA512
 /// in memory, you can compute the digest iteratively by creating a new hash
 /// instance, calling the ``update(data:)`` method repeatedly with blocks of
 /// data, and then calling the ``finalize()`` method to get the result.
+#if !DARLING_CRYPTOKIT_MODULE  // Darling: SHA-256 only, see DARLING-CHANGES.md
 public struct SHA512: HashFunctionImplementationDetails, Sendable {
     /// The number of bytes that represents the hash function’s internal state.
     public static let blockByteCount: Int = 128
@@ -271,4 +278,5 @@ public struct SHA512: HashFunctionImplementationDetails, Sendable {
         return impl.finalize()
     }
 }
+#endif
 #endif // canImport(CryptoKit)

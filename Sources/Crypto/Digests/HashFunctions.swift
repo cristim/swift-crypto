@@ -12,11 +12,15 @@
 //
 //===----------------------------------------------------------------------===//
 
-#if canImport(CryptoKit)
+#if canImport(CryptoKit) && !DARLING_CRYPTOKIT_MODULE
 @_exported import CryptoKit
+#else
+#if DARLING_CRYPTOKIT_MODULE
+typealias DigestImpl = DarlingDigestImpl
 #else
 typealias DigestImpl = OpenSSLDigestImpl
 typealias DigestImplSHA3 = XKCPDigestImpl
+#endif
 
 #if canImport(FoundationEssentials)
 public import FoundationEssentials
@@ -46,7 +50,11 @@ public import Foundation
 public protocol HashFunction: Sendable {
     /// The number of bytes that represents the hash function’s internal state.
     static var blockByteCount: Int { get }
+    #if DARLING_CRYPTOKIT_MODULE
+    associatedtype Digest: CryptoKit.Digest
+    #else
     associatedtype Digest: Crypto.Digest
+    #endif
 
     /// Creates a hash function.
     ///

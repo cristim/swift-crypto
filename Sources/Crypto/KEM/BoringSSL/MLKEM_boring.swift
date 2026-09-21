@@ -16,7 +16,7 @@
 // any edits of this file WILL be overwritten and thus discarded
 // see section `gyb` in `README` for details.
 
-#if canImport(CryptoKit)
+#if canImport(CryptoKit) && !DARLING_CRYPTOKIT_MODULE
 @_exported import CryptoKit
 #else
 #if hasFeature(SourceWarningControl)
